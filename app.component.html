@@ -1,0 +1,143 @@
+<form [formGroup]="profileForm" class="form-container">
+  <mat-toolbar class="toolbar">
+    <span class="fill-remaining-space"></span>
+    <span>Adressenboek</span>
+    <span class="fill-remaining-space"></span>
+  </mat-toolbar>
+
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile>
+      <div class="control-container">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+          <input formControlName="firstName" matInput placeholder="Naam*">
+          <mat-error>Dit veld is verplicht.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="lastName" matInput placeholder="Achternaam*">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="streetName" matInput placeholder="Adres*">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="streetNumber" matInput placeholder="Huisnummer*">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="streetAdd" matInput placeholder="Toevoeging">
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="control-container">
+        <mat-form-field>
+          <input formControlName="zipCode" matInput placeholder="Postcode*">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="city" matInput placeholder="Plaats*">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Geboortedatum</mat-label>
+          <input formControlName="birthDate" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="phoneNumber" matInput placeholder="Telefoonnummer">
+          <mat-error *ngIf="profileForm.get('phoneNumber').errors?.required">Vul een geldige waarde in.</mat-error>
+          <mat-error *ngIf="profileForm.get('phoneNumber').errors?.minlength">Minimum van 10 cijfers.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="emailAddress" matInput placeholder="E-mailadres">
+          <mat-error>Geen geldig e-mailadres.</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="button-row">
+    <button (click)="saveForm()" mat-raised-button color="primary" type="submit">Opslaan</button>
+    <button mat-raised-button color="warn" (click)="onClear()">Wissen</button>
+  </div>
+
+  <!-- <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nieuw adres</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row justify-content-center">
+        <div class="example-container">
+          <mat-form-field>
+            <input formControlName="firstName" matInput placeholder="Naam">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('firstName').touched && profileForm.get('firstName').errors?.required">
+              Naam is vereist
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="lastName" matInput placeholder="Achternaam">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('lastName').touched && profileForm.get('lastName').errors?.required">
+              Achternaam is vereist
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="streetName" matInput placeholder="Adres">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('streetName').touched && profileForm.get('streetName').errors?.required">
+              Adres is vereist
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="streetNumber" matInput placeholder="Huisnummer">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('streetNumber').touched && profileForm.get('streetNumber').errors?.required">
+              Huisnummer is vereist
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="streetAdd" matInput placeholder="Toevoeging (optioneel)">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('streetAdd').touched && profileForm.get('streetAdd').errors?.required">
+              Vul waarde in (optioneel)
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="zipCode" matInput placeholder="Postcode">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('zipCode').touched && profileForm.get('zipCode').errors?.required">
+              Postcode is vereist
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="city" matInput placeholder="Plaats">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('city').touched && profileForm.get('city').errors?.required">
+              Plaats is vereist
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="phoneNumber" matInput placeholder="Telefoonnummer" minlength="10">
+            <mat-hint style="color: red;" *ngIf="profileForm.get('phoneNumber').touched && profileForm.get('phoneNumber').errors?.minlength">
+              Vul 10 cijfers in (optioneel)
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input formControlName="emailAddress" matInput placeholder="E-mailadres" [formControl]="email">
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="saveForm()" mat-raised-button color="primary">Opslaan</button>
+    </mat-card-actions>
+  </mat-card> -->
+</form>
